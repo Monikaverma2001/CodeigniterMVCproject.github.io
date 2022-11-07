@@ -12,7 +12,7 @@ class News extends BaseController
         $model = model(NewsModel::class);
 
         $data = [
-            'news'  => $model->getNews(),
+            'stock'  => $model->getNews(),
             'title' => 'News archive',
         ];
 
@@ -25,14 +25,14 @@ class News extends BaseController
     {
         $model = model(NewsModel::class);
 
-        $data['news'] = $model->getNews($slug);
+        $data['stock'] = $model->getNews($slug);
       
-	if (empty($data['news'])) {
+	if (empty($data['stock'])) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Cannot find the news item: ' . $slug);
         }
 
 
-        $data['title'] = $data['news']['title'];
+        $data['title'] = $data['stock']['title'];
 
         return view('templates/header', $data)
                  . view('news/view')
@@ -42,7 +42,7 @@ class News extends BaseController
 
     public function create()
     {
-        $model = model(NewsModel::class);
+        $model = model(UserModel::class);
 
         if ($this->request->getMethod() === 'post' && $this->validate([
             'title' => 'required|min_length[3]|max_length[255]',
@@ -52,6 +52,7 @@ class News extends BaseController
                 'title' => $this->request->getPost('title'),
                 'slug'  => url_title($this->request->getPost('title'), '-', true),
                 'body'  => $this->request->getPost('body'),
+               
             ]);
 
             return view('news/success');
@@ -61,4 +62,30 @@ class News extends BaseController
             . view('news/create')
             . view('templates/footer');
     }
+    public function login()
+    {
+       $model = model(UserModel::class);
+
+        if ($this->request->getMethod() === 'post' && $this->validate([
+            'title' => 'required|min_length[3]|max_length[255]',
+            'body'  => 'required',
+        ])) {
+            $model->save([
+                'title' => $this->request->getPost('title'),
+                'slug'  => url_title($this->request->getPost('title'), '-', true),
+                'body'  => $this->request->getPost('body'),
+               
+            ]);
+
+            return view('news/success');
+        }
+
+        return view('templates/header', ['title' => 'Create a news item'])
+            . view('news/login')
+            . view('templates/footer');
+    }
 }
+
+
+
+

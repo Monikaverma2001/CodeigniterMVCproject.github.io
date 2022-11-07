@@ -31,16 +31,29 @@ $routes->set404Override();
  * --------------------------------------------------------------------
  * Route Definitions
  * --------------------------------------------------------------------
- */
-
+*/
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->match(['get', 'post'], 'news/create', 'News::create');
+$routes->match(['get', 'post'], 'news/login', 'News::login');
 $routes->get('news/(:segment)', 'News::view/$1');
 $routes->get('news', 'News::index');
 $routes->get('pages', 'Pages::index');
 $routes->get('(:any)', 'Pages::view/$1');
+
+/*
+ * --------------------------------------------------------------------
+ * Route Definitions
+ * --------------------------------------------------------------------
+ 
+ $routes->get('/', 'Home::index');
+$routes->get('/', 'SignupController::index');
+$routes->get('/signup', 'SignupController::index');
+$routes->match(['get', 'post'], 'SignupController/store', 'SignupController::store');
+$routes->match(['get', 'post'], 'SigninController/loginAuth', 'SigninController::loginAuth');
+$routes->get('/signin', 'SigninController::index');
+$routes->get('/profile', 'ProfileController::index',['filter' => 'authGuard']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing

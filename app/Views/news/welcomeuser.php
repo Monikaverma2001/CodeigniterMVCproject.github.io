@@ -1,11 +1,12 @@
 <h2><?= esc($title) ?></h2>
 <div style="margin:20px 20px">
-<?php if (! empty($stock) && is_array($stock)): ?>
+<?php if (! empty($news) && is_array($news)): ?>
 
-    <?php foreach ($stock as $news_item): ?>
+    <?php foreach ($news as $news_item): ?>
 
         <h3><?= esc($news_item['title']) ?></h3>
-
+       
+        
         <div class="main">
             <?= esc($news_item['body']) ?><br>
             <?= esc($news_item['slug']) ?><hr>
@@ -24,3 +25,17 @@
 <?php endif ?>
 
 </div>
+
+
+<?php
+
+$query   = $db->query('SELECT name, title, email FROM my_table');
+$results = $query->getResult();
+
+foreach ($results as $row) {
+    echo $row->title;
+    echo $row->name;
+    echo $row->email;
+}
+
+echo 'Total Results: ' . count($results);

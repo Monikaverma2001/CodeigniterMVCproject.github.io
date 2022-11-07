@@ -1,3 +1,3 @@
-<h2><?= esc($news['title']) ?></h2>
-<p><?= esc($news['body']) ?></p>
+<h2><?= esc($stock['title']) ?></h2>
+<p><?= esc($stock['body']) ?></p>
 
