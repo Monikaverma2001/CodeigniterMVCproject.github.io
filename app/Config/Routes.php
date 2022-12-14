@@ -35,8 +35,13 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get('/dashboard', 'Dashboard::index',['filter' => 'auth']);
+$routes->match(['get', 'post'], 'news/update', 'News::update');
+$routes->match(['get', 'post'], 'news/delete', 'News::delete');
+$routes->match(['get', 'post'], 'news/add', 'News::add');
 $routes->match(['get', 'post'], 'news/create', 'News::create');
 $routes->match(['get', 'post'], 'news/login', 'News::login');
+$routes->match(['get', 'post'], 'news/contact', 'News::contact');
 $routes->get('news/(:segment)', 'News::view/$1');
 $routes->get('news', 'News::index');
 $routes->get('pages', 'Pages::index');

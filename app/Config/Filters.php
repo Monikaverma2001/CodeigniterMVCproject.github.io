@@ -25,6 +25,7 @@ class Filters extends BaseConfig
 	'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 	'honeypot' => \CodeIgniter\Filters\Honeypot::class,
 	'authGuard' => \App\Filters\AuthGuard::class,
+       // 'auth' => \App\Filters\Auth::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
     ];
@@ -61,9 +62,11 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-   public $methods = [
+   
+     public $methods = [
         'post' => ['csrf'],
-    ]; 
+    ];
+
 
     /**
      * List of filter aliases that should run on any

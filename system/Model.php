@@ -798,6 +798,14 @@ class Model extends BaseModel
 
         return $this->where(['slug' => $slug])->first();
     }
+    public function run($slug = false)
+   {
+        if ($slug === false) {
+          return $this->findAll();
+       }
+
+       return $this->where(['slug' => $slug])->first();
+  }
     /**
      * Takes a class an returns an array of it's public and protected
      * properties as an array suitable for use in creates and updates.
